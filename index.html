@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F2E 薪資調查數據圖</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="img/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="css/all.css">
 </head>
@@ -39,17 +43,17 @@
             </div>
         </nav>
     </header>
-    <section class="mt-5 js-pagetitle">
+    <section class="mt-5 ">
         <div class="container">
             <div class="row">
-                <h2 class="col-12 text-white text-center">前端薪資調查報告</h2>
+                <h2 class="col-12 text-white text-center js-pagetitle">前端薪資調查報告</h2>
             </div>
         </div>
     </section>
     <section class="mt-5">
         <div class="container">
             <div class="row">
-                <div class="btn-group btn-group-custom offset-lg-4 col-8 col-lg-4" role="group" aria-label="Basic radio toggle button group">
+                <div class="btn-group btn-group-custom offset-lg-4 col-8 col-lg-4 js-togglechart" role="group of button" aria-label="toggle display charts">
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
                     <label class="btn btn-custom flex-1" for="btnradio1">基本資料</label>
                   
@@ -67,31 +71,54 @@
             </div>
         </div>
     </section>
-    <section class="mt-5">
+    <section id="chartpage-1" class="mt-5">
         <div class="container">
             <div class="row g-4">
                 <div class="col-12 col-lg-6">
                     <div class="card-custom p-4">
                         <h3 class="text-white">地區</h3>
-                        <canvas id="areaChart"></canvas>
+                        <p class="mt-4"><small>單位：人</small></p>
+                        <canvas id="area-chart"></canvas>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="card-custom p-4">
                         <h3 class="text-white">年齡</h3>
-                        <canvas id="ageChart"></canvas>
+                        <p class="mt-4"><small>單位：人</small></p>
+                        <canvas id="age-chart"></canvas>
                     </div>
                 </div>
                 <div class="col-12 col-lg-5">
-                    <div class="card-custom p-4">
-                        <h3 class="text-white">性別</h3>
-                        <canvas id="genderChart"></canvas>
+                    <div class="card-custom p-4 h-100">
+                        <h3 class="text-white">性別比例</h3>
+                        <p class="mt-4"></p>
+                        <div class="d-flex align-items-center">
+                            <div class="col-3 text-white text-center">
+                                <p>女<br><span class="female-percentage"></span></p>
+                            </div>
+                            <div class="col-6">
+                                <canvas id="gender-chart"></canvas>
+                            </div>
+                            
+                            <div class="col-3 text-white text-center">
+                                <p>男<br><span class="male-percentage"></span></p>
+                            </div>    
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-12 col-lg-7">
                     <div class="card-custom p-4">
                         <h3 class="text-white">科系與學歷</h3>
-                        <canvas id="eduChart"></canvas>
+                        <div class="col-12 d-flex align-items-end">
+                            <div class="flex-1">
+                                <canvas id="major-chart"></canvas>
+                            </div>
+                            <div class="col-auto ps-4 pb-5">
+                                <small>單位：人</small>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-12">
@@ -99,10 +126,93 @@
                         <h3 class="text-white">第一份工作所採用之技術/軟體</h3>
                         <div class="row g-4">
                             <div class="col-12 col-lg-6">
-                                <canvas id="skillChart"></canvas>
+                                <canvas id="skill-chart"></canvas>
                             </div>
-                            <div class="js-skill offset-lg-1 col-12 col-lg-4 p-4 rounded-3 text-white bg-custom-grey">
+                            <div class="offset-lg-1 col-12 col-lg-4 p-4 rounded-3 text-white bg-custom-grey js-skill-detail">
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="chartpage-2" class="mt-5 d-none">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="card-custom p-4">
+                        <h3 class="text-white">現職年資</h3>
+                        <p class="mt-4"><small>單位：人</small></p>
+                        <canvas id="tenure-chart"></canvas>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card-custom p-4">
+                        <h3 class="text-white">年薪</h3>
+                        <p class="mt-4"><small>單位：千元</small></p>
+                        <canvas id="salary-chart"></canvas>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card-custom p-4">
+                        <h3 class="text-white">產業分布</h3>
+                        <p class="mt-4"></p>
+                        <div class="d-flex flex-wrap align-items-center">
+                            <div class="col-12 col-lg-7 d-flex align-items-center">
+                                <div class="col-3 text-white text-center">
+                                    <p>自有產品<br><span class="self-industry-percentage"></span></p>
+                                </div>
+                                <div class="col-6">
+                                    <canvas id="industry-chart"></canvas>
+                                </div>
+                                <div class="col-3 text-white text-center">
+                                    <p>接案公司<br><span class="case-industry-percentage"></span></p>
+                                </div>    
+                            </div>
+                            <div class="col-12 col-lg-5 mt-4 mt-lg-0">
+                                <div class="p-4 rounded-3 text-white bg-custom-grey">
+                                    <div>
+                                        <strong class='h5'>自有產品公司之產業人數排名 Top 10</strong>
+                                        <ul class="d-flex flex-wrap row-cols-2 mt-2 js-industry"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card-custom p-4">
+                        <div class="d-flex flex-wrap">
+                            <div class="col-12 col-lg-5">
+                                <h3 class="text-white">產業薪資與滿意度</h3>
+                            </div>
+                            <div class="col-12 col-lg-7 text-lg-end js-score-selection">
+                                <button type="button" class="btn btn-outline-light pe-3 py-1 mx-1 d-inline-flex align-items-center" value="previous">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left me-2" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                    </svg> 
+                                    上８筆
+                                </button>
+                                <button type="button" class="btn btn-outline-light ps-3 py-1 mx-1 d-inline-flex align-items-center" value="next">
+                                    下８筆
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right ms-2" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </button>
+                                <div class="btn-group col-12 col-lg-auto mt-2 mt-lg-0">
+                                    <button type="button" class="btn btn-outline-light dropdown-toggle px-3 py-1 ms-1 js-score-condition-btn flex-grow-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                        依從業人數 高至低
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item text-light" href="#" data-condition="Desc">依從業人數 高至低</a></li>
+                                      <li><a class="dropdown-item text-light" href="#" data-condition="Asc">依從業人數 低至高</a></li>
+                                    </ul>
+                                  </div>
+                            </div>
+                        </div>
+                        <p class="mt-4"><small>單位：千元</small></p>
+                        <div class="js-score-chart">
+                            <canvas id="score-chart"></canvas>
                         </div>
                     </div>
                 </div>
